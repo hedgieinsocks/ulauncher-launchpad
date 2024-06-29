@@ -1,0 +1,21 @@
+{
+    "api_version": "3",
+    "name": "Launchpad",
+    "authors": "hedgieinsocks",
+    "icon": "utilities-terminal",
+    "triggers": {
+        "regular": {
+            "keyword": "sh",
+            "name": "List and launch scripts",
+            "description": "Execute the selected script"
+        }
+    },
+    "preferences": {
+        "scripts_dir": {
+            "type": "input",
+            "name": "Scripts directory",
+            "description": "Path to the directory with the scripts",
+            "default_value": "~/scripts"
+        }
+    }
+}
