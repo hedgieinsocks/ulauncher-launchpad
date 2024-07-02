@@ -5,7 +5,7 @@
     "icon": "utilities-terminal",
     "triggers": {
         "regular": {
-            "keyword": "sh",
+            "keyword": "s",
             "name": "List and launch scripts",
             "description": "Execute the selected script"
         }
@@ -13,7 +13,7 @@
     "preferences": {
         "scripts_dir": {
             "type": "input",
-            "name": "Scripts directory",
+            "name": "Scripts Directory",
             "description": "Path to the directory with the scripts",
             "default_value": "~/scripts"
         }
