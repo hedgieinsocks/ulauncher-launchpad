@@ -15,11 +15,17 @@ class Launchpad(Extension):
 
     def on_input(self, input_text, trigger_id):
 
-        scripts_dir = Path(self.preferences['scripts_dir'] or '~').expanduser().resolve()
+        if not self.preferences['scripts_dir']:
+                return [Result(icon=ICON,
+                               name='The scripts directory is not set',
+                               description='Specify the scripts directory in the extension settings',
+                               on_enter=True)]
+
+        scripts_dir = Path(self.preferences['scripts_dir']).expanduser()
         if not scripts_dir.is_dir():
             return [Result(icon=ICON,
-                           name='The provided directory does not exist',
-                           description=f'Ensure that {scripts_dir} directory exists',
+                           name='The provided scripts directory does not exist',
+                           description='Double-check the scripts directory in the extension settings',
                            on_enter=True)]
 
         scripts = [f for f in scripts_dir.iterdir() if f.is_file()]

@@ -15,7 +15,7 @@
             "type": "input",
             "name": "Scripts Directory",
             "description": "Path to the directory with the scripts",
-            "default_value": "~/scripts"
+            "default_value": ""
         }
     }
 }
