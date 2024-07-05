@@ -12,38 +12,42 @@ ICON='utilities-terminal'
 
 
 class Launchpad(Extension):
+    def __init__(self):
+        super().__init__()
+        self.scripts = []
 
     def on_input(self, input_text, trigger_id):
+        query = input_text.lower().strip()
 
-        if not self.preferences['scripts_dir']:
+        if not query:
+            if not self.preferences['scripts_dir']:
                 return [Result(icon=ICON,
-                               name='The scripts directory is not set',
-                               description='Specify the scripts directory in the extension settings',
+                               name='The scripts directory is not configured',
+                               description='Set the scripts directory in the extension settings',
                                on_enter=True)]
 
-        scripts_dir = Path(self.preferences['scripts_dir']).expanduser()
-        if not scripts_dir.is_dir():
-            return [Result(icon=ICON,
-                           name='The provided scripts directory does not exist',
-                           description='Double-check the scripts directory in the extension settings',
-                           on_enter=True)]
+            scripts_dir = Path(self.preferences['scripts_dir']).expanduser()
+            if not scripts_dir.is_dir():
+                return [Result(icon=ICON,
+                               name='The configured scripts directory does not exist',
+                               description='Double-check the scripts directory in the extension settings',
+                               on_enter=True)]
 
-        scripts = [f for f in scripts_dir.iterdir() if f.is_file()]
-        if not scripts:
-            return [Result(icon=ICON,
-                           name='No scripts found',
-                           description=f'Place the scripts into {scripts_dir}',
-                           on_enter=True)]
+            self.scripts = [f for f in scripts_dir.iterdir() if f.is_file()]
+            if not self.scripts:
+                return [Result(icon=ICON,
+                               name='No scripts found',
+                               description='Place the scripts into the scripts directory',
+                               on_enter=True)]
 
-        if not input_text:
-            matches = scripts
+            matches = self.scripts
         else:
-            matches = [i for i in scripts if input_text.lower() in i.name.lower()]
+            matches = [i for i in self.scripts if query in i.name.lower()]
 
         if not matches:
             return [Result(icon=ICON,
                            name='No matches found',
-                           description='Try to change the search request',
+                           description='Try to change the search pattern',
                            on_enter=True)]
 
         items = []
@@ -52,6 +56,8 @@ class Launchpad(Extension):
             items.append(Result(icon=get_icon_from_path(path),
                                 name=i.name,
                                 description=magic.detect_from_filename(path).mime_type,
+                                compact=self.preferences['compact'],
+                                highlightable=self.preferences['highlight'],
                                 on_enter=RunScriptAction(path)))
         return items
 

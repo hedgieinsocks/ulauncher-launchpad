@@ -5,9 +5,9 @@
     "icon": "utilities-terminal",
     "triggers": {
         "regular": {
-            "keyword": "s",
-            "name": "List and launch scripts",
-            "description": "Execute the selected script"
+            "keyword": "l",
+            "name": "Launchpad",
+            "description": "Search and launch scripts"
         }
     },
     "preferences": {
@@ -16,6 +16,18 @@
             "name": "Scripts Directory",
             "description": "Path to the directory with the scripts",
             "default_value": ""
+        },
+        "highlight": {
+            "type": "checkbox",
+            "name": "Highlight Matches",
+            "description": "Draw attension to the matched strings",
+            "default_value": false
+        },
+        "compact": {
+            "type": "checkbox",
+            "name": "Compact Mode",
+            "description": "Enable condensed view",
+            "default_value": false
         }
     }
 }
