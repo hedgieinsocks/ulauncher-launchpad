@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# icon: qrscanner-symbolic
+# description: Convert the clipboard contents to QR code
+
+wl-paste | qrencode -s 10 -o - | display

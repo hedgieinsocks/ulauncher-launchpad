@@ -6,8 +6,13 @@
     "triggers": {
         "regular": {
             "keyword": "l",
-            "name": "Launchpad",
-            "description": "Search and launch scripts"
+            "name": "Literal Search",
+            "description": "Look for exact matches"
+        },
+        "fuzzy": {
+            "keyword": "lf",
+            "name": "Fuzzy Search",
+            "description": "Look for fuzzy matches"
         }
     },
     "preferences": {
@@ -28,6 +33,14 @@
             "name": "Compact Mode",
             "description": "Enable condensed view",
             "default_value": false
+        },
+        "threshold": {
+            "type": "number",
+            "name": "Fuzzy Threshold",
+            "description": "Discard the items below this score",
+            "default_value": 40,
+            "min": 0,
+            "max": 99
         }
     }
 }
